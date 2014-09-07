@@ -1,0 +1,58 @@
+<?php
+namespace PeekPocket;
+
+use PeekPocket\Exception\CredentialsNotFoundException;
+
+class Credentials
+{
+    private $path;
+    private $credentials;
+
+    public function __construct($path)
+    {
+        $this->path = $path;
+
+        if (!file_exists($path)) {
+            throw new CredentialsNotFoundException($path . ' not found.');
+        }
+
+        $this->credentials = $this->parseCredentials(file_get_contents($path));
+    }
+
+    public function parseCredentials($content)
+    {
+        $credentials = [];
+        $lines = explode("\n", $content);
+        foreach ($lines as $line) {
+            if (trim($line) != '') {
+                list($key, $value) = array_map('trim', explode(":", $line));
+                $credentials[$key] = $value;
+            }
+        }
+
+        return $credentials;
+    }
+
+    public function getConsumerKey()
+    {
+        if (isset($this->credentials['consumer_key'])) {
+            return $this->credentials['consumer_key'];
+        }
+    }
+
+    public function setConsumerKey($value)
+    {
+        $this->credentials['consumer_key'] = $value;
+        return $this;
+    }
+
+    public function saveCredentials()
+    {
+        $file = new \SplFileObject($this->path, 'w');
+        foreach ($this->credentials as $key => $value) {
+            $file->fwrite("{$key}: {$value}\n");
+        }
+
+        return true;
+    }
+}
