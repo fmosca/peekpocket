@@ -6,7 +6,7 @@ Feature: Initialize Pocket API session
     Scenario: Getting a token
         Given there are no stored credentials
         When I launch the command 'initialize-session' with input:
-            | input          |
+            | INPUT          |
             | abc-123        |
             | peekpocket:foo |
         Then I got instructions to obtain a Consumer Key

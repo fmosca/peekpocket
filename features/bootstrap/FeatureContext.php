@@ -207,7 +207,7 @@ class FeatureContext implements SnippetAcceptingContext
         $helper = $command->getHelper('question');
         $stream = '';
         foreach ($table as $row) {
-            $stream .= $row['input'] . "\n";
+            $stream .= $row['INPUT'] . "\n";
         }
         $helper->setInputStream($this->getInputStream($stream));
         $this->commandTester->execute(array('command' => $command->getName()));
