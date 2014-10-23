@@ -13,7 +13,7 @@ class Credentials
         $this->path = $path;
 
         if (!file_exists($path)) {
-            throw new CredentialsNotFoundException($path . ' not found.');
+            touch($path);
         }
 
         $this->credentials = $this->parseCredentials(file_get_contents($path));
@@ -43,6 +43,19 @@ class Credentials
     public function setConsumerKey($value)
     {
         $this->credentials['consumer_key'] = $value;
+        return $this;
+    }
+
+    public function getAccessToken()
+    {
+        if (isset($this->credentials['access_token'])) {
+            return $this->credentials['access_token'];
+        }
+    }
+
+    public function setAccessToken($value)
+    {
+        $this->credentials['access_token'] = $value;
         return $this;
     }
 

@@ -25,12 +25,6 @@ class CredentialsSpec extends ObjectBehavior
         $this->shouldHaveType('PeekPocket\Credentials');
     }
 
-    function it_throws_an_exception_if_file_doesnt_exists()
-    {
-        $this->shouldThrow('PeekPocket\Exception\CredentialsNotFoundException')
-            ->during('__construct', array(vfsStream::url('home/notfound')));
-    }
-
     function it_parses_credentials()
     {
         $this->parseCredentials("consumer_key: foo")->shouldReturn(

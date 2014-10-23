@@ -10,9 +10,20 @@ use Symfony\Component\Console\Question\Question;
 
 use GuzzleHttp\Client;
 use PeekPocket\PocketOAuthClient;
+use PeekPocket\Credentials;
 
 class InitPocketSessionCommand extends Command
 {
+    private $credentials;
+    private $pocketOAuthClient;
+
+    public function __construct($credentials, $pocketOAuthClient)
+    {
+        $this->credentials = $credentials;
+        $this->pocketOAuthClient = $pocketOAuthClient;
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -26,32 +37,30 @@ class InitPocketSessionCommand extends Command
         $helper = $this->getHelper('question');
 
         $output->writeln('Create a new Pocket app: http://getpocket.com/developer/apps/new');
-        $question = new Question('Enter your Consumer Key:');
+        $question = new Question('Enter your Consumer Key: ');
         $consumerKey = $helper->ask($input, $output, $question);
 
-        $httpClient = new Client();
-        $oauthClient = new PocketOAuthClient($httpClient);
-        $token = $oauthClient->requestToken($consumerKey);
-
-
-        $authUrl = $oauthClient->getAuthUrl($token);
+        $token = $this->oauthClient->requestToken($consumerKey);
+        $authUrl = $this->oauthClient->getAuthUrl($token);
 
         $output->writeln("Visit this url to authorize this app: \n" 
-            . $authUrl . "
-            then come back.");
-        $question = new Question('Press any key to continue...');
+            . $authUrl . "\n" 
+            . "then come back.");
+        $question = new Question('Press enter to continue...');
         $helper->ask($input, $output, $question);
 
-        $accessToken = $oauthClient->requestAuth($consumerKey, $token);        
+        $accessToken = $this->oauthClient->requestAuth($consumerKey, $token);        
 
-        $data = $httpClient->get('https://getpocket.com/v3/get', [
-            'query' => [
-                'consumer_key' => $consumerKey,
-                'access_token' => $accessToken
-            ]
-        ]);
-
-        die($data->getBody());
+        $this->storeCredentials($consumerKey, $accessToken);
         
+        $output->writeln("Done.");
+        
+    }
+
+    private function storeCredentials($consumerKey, $accessToken)
+    {
+        $this->credentials->setConsumerKey($consumerKey);
+        $this->credentials->setAccessToken($accessToken);
+        $this->credentials->saveCredentials();
     }
 }

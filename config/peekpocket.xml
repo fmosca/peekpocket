@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="peekpocket.credentials_path">%homedir%/.peekpocketrc</parameter>
+    </parameters>
+    <services>
+        <service id="symfony.application"
+            class="Symfony\Component\Console\Application">
+            <argument key="name">PeekPocket</argument>
+            <argument key="version">0.1</argument>
+            <call method="add">
+                 <argument type="service" id="peekpocket.initialize_session_command" />
+            </call>
+            <call method="add">
+                 <argument type="service" id="peekpocket.fetch_command" />
+            </call>
+        </service>
+
+        <service id="peekpocket.initialize_session_command" 
+            class="PeekPocket\Console\Command\InitPocketSessionCommand">
+            <argument type="service" id="peekpocket.credentials" />
+            <argument type="service" id="peekpocket.pocket_oauth_client" />
+        </service>
+        
+        <service id="peekpocket.fetch_command" 
+            class="PeekPocket\Console\Command\FetchEntriesCommand">
+            <argument type="service" id="peekpocket.credentials" />
+            <argument type="service" id="peekpocket.http_client" />
+        </service>
+
+        <service id="peekpocket.credentials" class="PeekPocket\Credentials">
+            <argument>%peekpocket.credentials_path%</argument>
+        </service>
+
+        <service id="peekpocket.pocket_oauth_client" 
+            class="PeekPocket\PocketOAuthClient">
+            <argument type="service" id="peekpocket.http_client" />
+        </service>
+
+        <service id="peekpocket.http_client" 
+            class="GuzzleHttp\Client">
+        </service>
+
+        <service id="symfony.console_output"
+            class="Symfony\Component\Console\Output\ConsoleOutput">
+        </service>
+    </services>
+</container>
+

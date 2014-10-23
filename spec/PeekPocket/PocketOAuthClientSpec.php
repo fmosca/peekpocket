@@ -63,7 +63,7 @@ class PocketOAuthClientSpec extends ObjectBehavior
     
     function it_obtains_an_auth_token($httpClient, Response $response)
     {
-        $httpClient->post("https://getpocket.com/v3/oauth/request", [
+        $httpClient->post("https://getpocket.com/v3/oauth/authorize", [
             'body' => [
                 'consumer_key' => $this->consumerKey,
                 'code' => 'foo'
