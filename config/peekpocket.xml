@@ -38,6 +38,12 @@
             class="PeekPocket\PocketOAuthClient">
             <argument type="service" id="peekpocket.http_client" />
         </service>
+        
+        <service id="peekpocket.pocket" 
+            class="PeekPocket\PocketClient">
+            <argument type="service" id="peekpocket.credentials" />
+            <argument type="service" id="peekpocket.http_client" />
+        </service>
 
         <service id="peekpocket.http_client" 
             class="GuzzleHttp\Client">

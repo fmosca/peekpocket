@@ -75,4 +75,13 @@ class Credentials
 
         return true;
     }
+
+    public function getAuthPair()
+    {
+        return [
+            'consumer_key' => $this->getConsumerKey(),
+            'access_token' => $this->getAccessToken(),
+            ];
+
+    }
 }

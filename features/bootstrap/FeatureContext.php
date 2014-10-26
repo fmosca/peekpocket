@@ -15,6 +15,9 @@ use org\bovigo\vfs\vfsStream;
 use PeekPocket\Credentials;
 use PeekPocket\Console\Command\InitPocketSessionCommand;
 
+use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Message\Response;
+
 /**
  * Behat context class.
  */
@@ -25,6 +28,7 @@ class FeatureContext implements SnippetAcceptingContext
     protected $root;
     protected $output;
     protected $input;
+    protected $container;
 
     /**
      * Initializes context.
@@ -36,7 +40,19 @@ class FeatureContext implements SnippetAcceptingContext
     {
         $this->root = $root;
         $this->filesystem = vfsStream::setup('home', null, []);
+        $this->container = $this->bootContainer();
+    }
 
+    private function bootContainer()
+    {
+
+        $container = new ContainerBuilder();
+        $container->setParameter('homedir', vfsStream::url('home'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
+        $loader->load('peekpocket.xml');
+        $loader->load('peekpocket_test.xml');
+
+        return $container;
     }
 
     /**
@@ -234,15 +250,53 @@ class FeatureContext implements SnippetAcceptingContext
         $this->commandTester->execute(array('command' => $command->getName()));
     }
 
+    /**
+     * @Given I saved an entry with url :arg1
+     */
+    public function iSavedAnEntryWithUrl($arg1)
+    {
+        $httpClient = $this->container->get('peekpocket.http_client');
+
+        $mock = new Mock([
+            str_replace(
+                '##URL##',
+                $arg1,
+                file_get_contents($this->root . '/fixtures/api-one-item-response.http')),
+        ]);
+        $httpClient->getEmitter()->attach($mock);
+        
+    }
+
+    /**
+     * @Given there is a initialized Pocket client
+     */
+    public function thereIsAInitializedPocketClient()
+    {
+        file_put_contents(vfsStream::url('home/.peekpocketrc'), $this->getSampleCredentials());
+    }
+
+    /**
+     * @When I ask for the last :arg1 items
+     */
+    public function iAskForTheLastItems($arg1)
+    {
+        $pocket = $this->container->get('peekpocket.pocket');
+        $this->apiResult = $pocket->fetchItems(5);
+    }
+
+    /**
+     * @Then the first element of the result array must have url :arg1
+     */
+    public function theFirstElementOfTheResultArrayMustHaveUrl($arg1)
+    {
+        $item = $this->apiResult[0];
+        assertThat($item->getUrl(), equalTo($arg1));
+    }
+
+
     protected function getApplication()
     {
-        $container = new ContainerBuilder();
-        $container->setParameter('homedir', vfsStream::url('home'));
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
-        $loader->load('peekpocket.xml');
-        $loader->load('peekpocket_test.xml');
-
-        $output = $container->get('symfony.console_output');
+        $container = $this->container;
 
         return $container->get('symfony.application');
     }
@@ -254,5 +308,15 @@ class FeatureContext implements SnippetAcceptingContext
         rewind($stream);
 
         return $stream;
+    }
+
+    protected function getSampleCredentials()
+    {
+        $sampleCredentials = <<<EOD
+consumer_key: some_consumer_key
+access_token: some_access_token\n
+EOD;
+        return $sampleCredentials;
+
     }
 }

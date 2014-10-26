@@ -80,7 +80,6 @@ class PocketOAuthClientSpec extends ObjectBehavior
         $this->requestAuth($this->consumerKey, 'foo')->shouldReturn('abc123def');
     }
 
-
     function it_returns_an_auth_url()
     {
         $url = "https://getpocket.com/auth/authorize?request_token=foo&redirect_uri=http://getpocket.com";

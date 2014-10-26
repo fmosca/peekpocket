@@ -13,7 +13,7 @@ class CredentialsSpec extends ObjectBehavior
 
     function let()
     {
-        $credentials = "consumer_key: foo";
+        $credentials = "consumer_key: foo\naccess_token: bar\n";
         $this->filesystem = vfsStream::setup('home', null, ['credentials' => $credentials]);
 
         $this->beConstructedWith(vfsStream::url('home/credentials'));
@@ -55,5 +55,12 @@ EOD;
     function it_writes_the_consumer_key()
     {
         $this->setConsumerKey('foo')->shouldReturn($this);
+    }
+
+    function it_gives_auth_pair()
+    {
+        $this->getAuthPair()->shouldReturn(
+            ['consumer_key' => 'foo',
+            'access_token' => 'bar']);
     }
 }
