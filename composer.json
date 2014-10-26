@@ -14,6 +14,7 @@
         "symfony/console": "~2.5",
         "symfony/dependency-injection": "~2.5",
         "guzzlehttp/guzzle": "~5.0",
-        "symfony/config": "~2.5"
+        "symfony/config": "~2.5",
+        "hamcrest/hamcrest-php": "~1.2"
     }
 }

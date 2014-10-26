@@ -59,6 +59,13 @@ class Credentials
         return $this;
     }
 
+    public function storeCredentials($consumerKey, $accessToken)
+    {
+        $this->setConsumerKey($consumerKey);
+        $this->setAccessToken($accessToken);
+        return $this->saveCredentials();
+    }
+    
     public function saveCredentials()
     {
         $file = new \SplFileObject($this->path, 'w');

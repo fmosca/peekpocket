@@ -3,14 +3,16 @@ Feature: Initialize Pocket API session
     As a User
     I need to obtain a valid access token
 
-    Scenario: Getting a token
+    Scenario: Initialize the app by creating a new pocket app and obtaining
+              a valid access token.
         Given there are no stored credentials
         When I launch the command 'initialize-session' with input:
             | INPUT          |
             | abc-123        |
-            | peekpocket:foo |
-        Then I got instructions to obtain a Consumer Key
-        Then I got instructions to obtain a Token
+            | <enter>        |
+        Then I got instructions to create a new app
+        Then I got asked the consumer key
+        Then I got asket to confirm authorization
         Then credentials are stored
 
         

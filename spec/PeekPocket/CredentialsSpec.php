@@ -34,15 +34,16 @@ class CredentialsSpec extends ObjectBehavior
 
     function it_stores_credentials()
     {
-        $this->setConsumerKey('bar');
-        $this->saveCredentials()->shouldReturn(true);
+        $this->storeCredentials('some_consumer_key', 'some_access_token')->shouldReturn(true);
 
         $content = file_get_contents(vfsStream::url('home/credentials'));
 
-        $expected = "consumer_key: bar\n";
-        if (strpos($content, $expected) === false) {
-            throw new \Exception('value not found');
-        }
+        $expected = <<<EOD
+consumer_key: some_consumer_key
+access_token: some_access_token\n
+EOD;
+
+        assertThat($content, equalTo($expected));
 
     }
 

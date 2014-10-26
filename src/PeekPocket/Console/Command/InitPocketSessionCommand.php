@@ -40,8 +40,8 @@ class InitPocketSessionCommand extends Command
         $question = new Question('Enter your Consumer Key: ');
         $consumerKey = $helper->ask($input, $output, $question);
 
-        $token = $this->oauthClient->requestToken($consumerKey);
-        $authUrl = $this->oauthClient->getAuthUrl($token);
+        $token = $this->pocketOAuthClient->requestToken($consumerKey);
+        $authUrl = $this->pocketOAuthClient->getAuthUrl($token);
 
         $output->writeln("Visit this url to authorize this app: \n" 
             . $authUrl . "\n" 
@@ -49,18 +49,12 @@ class InitPocketSessionCommand extends Command
         $question = new Question('Press enter to continue...');
         $helper->ask($input, $output, $question);
 
-        $accessToken = $this->oauthClient->requestAuth($consumerKey, $token);        
+        $accessToken = $this->pocketOAuthClient->requestAuth($consumerKey, $token);        
 
-        $this->storeCredentials($consumerKey, $accessToken);
+        $this->credentials->storeCredentials($consumerKey, $accessToken);
         
         $output->writeln("Done.");
         
     }
 
-    private function storeCredentials($consumerKey, $accessToken)
-    {
-        $this->credentials->setConsumerKey($consumerKey);
-        $this->credentials->setAccessToken($accessToken);
-        $this->credentials->saveCredentials();
-    }
 }

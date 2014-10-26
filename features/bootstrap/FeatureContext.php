@@ -1,4 +1,7 @@
 <?php
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\SnippetAcceptingContext;
@@ -21,6 +24,7 @@ class FeatureContext implements SnippetAcceptingContext
     protected $credentials;
     protected $root;
     protected $output;
+    protected $input;
 
     /**
      * Initializes context.
@@ -58,31 +62,47 @@ class FeatureContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then I got instructions to obtain a Consumer Key
+     * @Then I got instructions to create a new app
      */
-    public function iGotInstructionsToObtainAConsumerKey()
+    public function iGotInstructionsToCreateANewApp()
     {
         $output = $this->commandTester->getDisplay();
         $expected = "Create a new Pocket app";
-        PHPUnit_Framework_Assert::assertNotFalse(strpos($output, $expected));
+        assertThat($output, containsString($expected));
     }
 
     /**
-     * @Then I got instructions to obtain a Token
+     * @Then I got asked the consumer key
      */
-    public function iGotInstructionsToObtainAToken()
+    public function iGotAskedTheConsumerKey()
     {
         $output = $this->commandTester->getDisplay();
-        $expected = "Visit this url to get a token:";
-        PHPUnit_Framework_Assert::assertNotFalse(strpos($output, $expected));
+        $expected = "Enter your Consumer Key:";
+        assertThat($output, containsString($expected));
     }
+
+    /**
+     * @Then I got asket to confirm authorization
+     */
+    public function iGotAsketToConfirmAuthorization()
+    {
+        $output = $this->commandTester->getDisplay();
+        $expected = "Visit this url to authorize this app:";
+        assertThat($output, containsString($expected));
+        $expected = "http://foo";
+        assertThat($output, containsString($expected));
+    }
+
+
 
     /**
      * @Then credentials are stored
      */
     public function credentialsAreStored()
     {
-        throw new PendingException();
+        $credentials = new Credentials(vfsStream::url('home/.peekpocketrc'));
+        assertThat($credentials->getConsumerKey(), equalTo($this->input[0]));
+        assertThat($credentials->getAccessToken(), equalTo('foo'));
     }
 
     /**
@@ -191,8 +211,7 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function iGetAnHelpMessage()
     {
-        PHPUnit_Framework_Assert::assertStringStartsWith('Peekpocket version', $this->output);
-        
+        assertThat($this->output, startsWith('PeekPocket version'));
     }
 
     /**
@@ -200,19 +219,33 @@ class FeatureContext implements SnippetAcceptingContext
      */
     public function iLaunchTheCommand($arg1, TableNode $table)
     {
-        $application = new Application();
-        $application->add(new InitPocketSessionCommand());
+        $this->input = array();
+        $application = $this->getApplication();
+
         $command = $application->find($arg1);
         $this->commandTester = new CommandTester($command);
         $helper = $command->getHelper('question');
         $stream = '';
         foreach ($table as $row) {
             $stream .= $row['INPUT'] . "\n";
+            $this->input[] = $row['INPUT'];
         }
         $helper->setInputStream($this->getInputStream($stream));
         $this->commandTester->execute(array('command' => $command->getName()));
     }
 
+    protected function getApplication()
+    {
+        $container = new ContainerBuilder();
+        $container->setParameter('homedir', vfsStream::url('home'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
+        $loader->load('peekpocket.xml');
+        $loader->load('peekpocket_test.xml');
+
+        $output = $container->get('symfony.console_output');
+
+        return $container->get('symfony.application');
+    }
 
     protected function getInputStream($input)
     {
