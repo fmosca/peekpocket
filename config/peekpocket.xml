@@ -6,6 +6,7 @@
         <parameter key="peekpocket.credentials_path">%homedir%/.peekpocketrc</parameter>
     </parameters>
     <services>
+        <!-- APPLICATION -->
         <service id="symfony.application"
             class="Symfony\Component\Console\Application">
             <argument key="name">PeekPocket</argument>
@@ -29,6 +30,12 @@
             <argument type="service" id="peekpocket.credentials" />
             <argument type="service" id="peekpocket.http_client" />
         </service>
+        
+        <service id="symfony.console_output"
+            class="Symfony\Component\Console\Output\ConsoleOutput">
+        </service>
+
+        <!-- DOMAIN -->
 
         <service id="peekpocket.credentials" class="PeekPocket\Credentials">
             <argument>%peekpocket.credentials_path%</argument>
@@ -49,9 +56,6 @@
             class="GuzzleHttp\Client">
         </service>
 
-        <service id="symfony.console_output"
-            class="Symfony\Component\Console\Output\ConsoleOutput">
-        </service>
     </services>
 </container>
 

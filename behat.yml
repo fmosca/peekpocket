@@ -1,6 +1,12 @@
 default:
     suites:
-      default:
-        contexts:
-          - FeatureContext:
-              root: %paths.base% 
+        cli_features:
+            paths:    [ %paths.base%/features/cli ]
+            contexts: 
+                - CliContext:
+                    root: %paths.base% 
+        api_features:
+            paths:    [ %paths.base%/features/api ]
+            contexts: 
+                - ApiContext:
+                    root: %paths.base%

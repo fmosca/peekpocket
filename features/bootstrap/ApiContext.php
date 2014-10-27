@@ -21,13 +21,11 @@ use GuzzleHttp\Message\Response;
 /**
  * Behat context class.
  */
-class FeatureContext implements SnippetAcceptingContext
+class ApiContext implements SnippetAcceptingContext
 {
     protected $filesystem;
     protected $credentials;
     protected $root;
-    protected $output;
-    protected $input;
     protected $container;
 
     /**
@@ -55,71 +53,6 @@ class FeatureContext implements SnippetAcceptingContext
         return $container;
     }
 
-    /**
-     * @Given there are no stored credentials
-     */
-    public function thereAreNoStoredCredentials()
-    {
-        file_put_contents(vfsStream::url('home/credentials'), '');
-        $credentials = new Credentials(vfsStream::url('home/credentials'));
-        $key = $credentials->getConsumerKey();
-        if ($key != '') {
-            throw new Exception('Stored credentials found!');
-        }
-
-    }
-
-    /**
-     * @When I launch the application
-     */
-    public function iLaunchTheApplication()
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Then I got instructions to create a new app
-     */
-    public function iGotInstructionsToCreateANewApp()
-    {
-        $output = $this->commandTester->getDisplay();
-        $expected = "Create a new Pocket app";
-        assertThat($output, containsString($expected));
-    }
-
-    /**
-     * @Then I got asked the consumer key
-     */
-    public function iGotAskedTheConsumerKey()
-    {
-        $output = $this->commandTester->getDisplay();
-        $expected = "Enter your Consumer Key:";
-        assertThat($output, containsString($expected));
-    }
-
-    /**
-     * @Then I got asket to confirm authorization
-     */
-    public function iGotAsketToConfirmAuthorization()
-    {
-        $output = $this->commandTester->getDisplay();
-        $expected = "Visit this url to authorize this app:";
-        assertThat($output, containsString($expected));
-        $expected = "http://foo";
-        assertThat($output, containsString($expected));
-    }
-
-
-
-    /**
-     * @Then credentials are stored
-     */
-    public function credentialsAreStored()
-    {
-        $credentials = new Credentials(vfsStream::url('home/.peekpocketrc'));
-        assertThat($credentials->getConsumerKey(), equalTo($this->input[0]));
-        assertThat($credentials->getAccessToken(), equalTo('foo'));
-    }
 
     /**
      * @Given there is a credentials file
@@ -161,22 +94,6 @@ class FeatureContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then I should get a CredentialsNotFoundException
-     */
-    public function iShouldGetACredentialsnotfoundexception()
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given the value :arg1 is not set
-     */
-    public function theValueIsNotSet($arg1)
-    {
-        throw new PendingException();
-    }
-
-    /**
      * @When I save the credentials file
      */
     public function iSaveTheCredentialsFile()
@@ -214,41 +131,6 @@ class FeatureContext implements SnippetAcceptingContext
         $this->credentials->setConsumerKey('foo');
     }
 
-    /**
-     * @When I launch the application without parameters
-     */
-    public function iLaunchTheApplicationWithoutParameters()
-    {
-        $this->output = shell_exec($this->root . '/peekpocket --no-ansi');
-    }
-
-    /**
-     * @Then I get an help message
-     */
-    public function iGetAnHelpMessage()
-    {
-        assertThat($this->output, startsWith('PeekPocket version'));
-    }
-
-    /**
-     * @When I launch the command :arg1 with input:
-     */
-    public function iLaunchTheCommand($arg1, TableNode $table)
-    {
-        $this->input = array();
-        $application = $this->getApplication();
-
-        $command = $application->find($arg1);
-        $this->commandTester = new CommandTester($command);
-        $helper = $command->getHelper('question');
-        $stream = '';
-        foreach ($table as $row) {
-            $stream .= $row['INPUT'] . "\n";
-            $this->input[] = $row['INPUT'];
-        }
-        $helper->setInputStream($this->getInputStream($stream));
-        $this->commandTester->execute(array('command' => $command->getName()));
-    }
 
     /**
      * @Given I saved an entry with url :arg1
@@ -293,22 +175,6 @@ class FeatureContext implements SnippetAcceptingContext
         assertThat($item->getUrl(), equalTo($arg1));
     }
 
-
-    protected function getApplication()
-    {
-        $container = $this->container;
-
-        return $container->get('symfony.application');
-    }
-
-    protected function getInputStream($input)
-    {
-        $stream = fopen('php://memory', 'r+', false);
-        fputs($stream, $input);
-        rewind($stream);
-
-        return $stream;
-    }
 
     protected function getSampleCredentials()
     {
