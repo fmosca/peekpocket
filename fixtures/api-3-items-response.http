@@ -1,0 +1,137 @@
+HTTP/1.1 200 OK
+Content-Type: application/json
+Status: 200 OK
+
+{
+  "status": 1,
+  "complete": 1,
+  "list": {
+    "671030243": {
+      "item_id": "671030243",
+      "resolved_id": "671030243",
+      "given_url": "http:\/\/www.newyorker.com\/magazine\/2011\/05\/16\/creation-myth",
+      "given_title": "Creation Myth - The New Yorker",
+      "favorite": "0",
+      "status": "0",
+      "time_added": "1422751201",
+      "time_updated": "1422751201",
+      "time_read": "0",
+      "time_favorited": "0",
+      "sort_id": 3,
+      "resolved_title": "The New Yorker",
+      "resolved_url": "http:\/\/www.newyorker.com\/magazine\/2011\/05\/16\/creation-myth",
+      "excerpt": "In late 1979, a twenty-four-year-old entrepreneur paid a visit to a research center in Silicon Valley called Xerox PARC. He was the co-founder of a small computer startup down the road, in Cupertino. His name was Steve Jobs.  Xerox PARC was the innovation arm of the Xerox Corporation.",
+      "is_article": "1",
+      "is_index": "0",
+      "has_video": "0",
+      "has_image": "1",
+      "word_count": "5846",
+      "authors": {
+        "21989690": {
+          "item_id": "671030243",
+          "author_id": "21989690",
+          "name": "Malcolm Gladwell",
+          "url": "http:\/\/www.newyorker.com\/contributors\/malcolm-gladwell"
+        }
+      },
+      "image": {
+        "item_id": "671030243",
+        "src": "http:\/\/www.newyorker.com\/wp-content\/uploads\/2011\/05\/110516_r20860_g2048-1200.jpg",
+        "width": "0",
+        "height": "0"
+      },
+      "images": {
+        "1": {
+          "item_id": "671030243",
+          "image_id": "1",
+          "src": "http:\/\/www.newyorker.com\/wp-content\/uploads\/2011\/05\/110516_r20860_g2048-1200.jpg",
+          "width": "0",
+          "height": "0",
+          "credit": "\n\t\t\t\t\t\t\t\t\t\t PAUL ROGERS\t\t\t\t\t\t\t\t\t",
+          "caption": "The mouse was conceived by the computer scientist Douglas Engelbart, developed by Xerox PARC, and made marketable by Apple.\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\tCredit PAUL ROGERS\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+        }
+      }
+    },
+    "566401731": {
+      "item_id": "566401731",
+      "resolved_id": "566401731",
+      "given_url": "https:\/\/www.domenkozar.com\/2014\/03\/11\/why-puppet-chef-ansible-arent-good-enough-and-we-can-do-better\/",
+      "given_title": "Domen Ko\u017ear",
+      "favorite": "0",
+      "status": "0",
+      "time_added": "1422623520",
+      "time_updated": "1422623520",
+      "time_read": "0",
+      "time_favorited": "0",
+      "sort_id": 4,
+      "resolved_title": "Why Puppet\/Chef\/Ansible aren't good enough (and we can do better)",
+      "resolved_url": "https:\/\/www.domenkozar.com\/2014\/03\/11\/why-puppet-chef-ansible-arent-good-enough-and-we-can-do-better\/",
+      "excerpt": "This particular blog post was sitting on my mind for a long time. I don't want to start a flame war, but at the same time I also don't wish for Linux community to build and grow upon ad-hoc solutions that we've accumulated over the last 30 years to the packaging and deployment problems.",
+      "is_article": "1",
+      "is_index": "0",
+      "has_video": "0",
+      "has_image": "1",
+      "word_count": "1977",
+      "image": {
+        "item_id": "566401731",
+        "src": "https:\/\/www.domenkozar.com\/images\/packaging_stateful.png",
+        "width": "0",
+        "height": "0"
+      },
+      "images": {
+        "1": {
+          "item_id": "566401731",
+          "image_id": "1",
+          "src": "https:\/\/www.domenkozar.com\/images\/packaging_stateful.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        },
+        "2": {
+          "item_id": "566401731",
+          "image_id": "2",
+          "src": "https:\/\/www.domenkozar.com\/images\/packaging_stateless.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        }
+      }
+    },
+    "829984252": {
+      "item_id": "829984252",
+      "resolved_id": "829984252",
+      "given_url": "https:\/\/topherlandry.wordpress.com\/2015\/01\/29\/solid-architecture-and-the-decorator-pattern\/",
+      "given_title": "SOLID Architecture and the Decorator Pattern | Insights into Software Devel",
+      "favorite": "0",
+      "status": "0",
+      "time_added": "1422623133",
+      "time_updated": "1422623133",
+      "time_read": "0",
+      "time_favorited": "0",
+      "sort_id": 5,
+      "resolved_title": "SOLID Architecture and the Decorator Pattern",
+      "resolved_url": "https:\/\/topherlandry.wordpress.com\/2015\/01\/29\/solid-architecture-and-the-decorator-pattern\/",
+      "excerpt": "My last post was on the Single Responsibility Principle and the repository pattern. I received a comment back that my implementation would be cleaner if I had used the decorator pattern.",
+      "is_article": "1",
+      "is_index": "0",
+      "has_video": "0",
+      "has_image": "0",
+      "word_count": "727",
+      "authors": {
+        "28935146": {
+          "item_id": "829984252",
+          "author_id": "28935146",
+          "name": "topherlandry",
+          "url": "https:\/\/topherlandry.wordpress.com\/author\/topherlandry\/"
+        }
+      }
+    }
+  },
+  "error": null,
+  "search_meta": {
+    "search_type": "normal"
+  },
+  "since": 1422810340
+}

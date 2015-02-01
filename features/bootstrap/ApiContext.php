@@ -143,7 +143,7 @@ class ApiContext implements SnippetAcceptingContext
             str_replace(
                 '##URL##',
                 $arg1,
-                file_get_contents($this->root . '/fixtures/api-one-item-response.http')),
+                file_get_contents($this->root . '/fixtures/api-1-items-response.http')),
         ]);
         $httpClient->getEmitter()->attach($mock);
         
@@ -185,4 +185,37 @@ EOD;
         return $sampleCredentials;
 
     }
+
+
+    /**
+     * @Given I Saved :count entries yesterday
+     */
+    public function iSaved($count)
+    {
+        $httpClient = $this->container->get('peekpocket.http_client');
+
+        $mock = new Mock([
+                file_get_contents($this->root . '/fixtures/api-' . $count . '-items-response.http'),
+        ]);
+        $httpClient->getEmitter()->attach($mock);
+    }
+
+    /**
+     * @When I ask for yesterday's entries
+     */
+    public function iAskForYesterdaySEntries()
+    {
+        $pocket = $this->container->get('peekpocket.pocket');
+        $this->apiResult = $pocket->fetchItemsByDate(new \DateTime('yesterday'));
+    }
+
+    /**
+     * @Then I get a collection of :count entries
+     */
+    public function iGetACollectionOfEntries($count)
+    {
+        assertThat(count($this->apiResult), equalTo($count));
+    }
+
+
 }

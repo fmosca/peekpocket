@@ -20,7 +20,8 @@ class PocketClient
     public function fetchItems($count)
     {
         $result = $this->apiCall('get', [
-            'count' => $count
+            'count' => $count,
+            'detailType' => 'complete'
             ]);
 
         return $this->fetchItemsFromApiResult($result);
@@ -35,12 +36,28 @@ class PocketClient
         return $this->fetchItemsFromApiResult($result);
 
     }
+    
+    public function fetchItemsByDate(\DateTime $when)
+    {
+        $result = $this->apiCall('get', [
+            'since' => $when->format('U')
+            ]);
+
+        $items = $this->fetchItemsFromApiResult($result);
+        return array_filter($items, function($item) use ($when) {
+            $createdOn = $item->getCreatedAt()->format('Y-m-d');
+            return $createdOn == $when->format('Y-m-d'); 
+        });
+        
+
+    }
 
     private function apiCall($method, $args)
     {
         $defaultBody = [
                 'consumer_key' => $this->credentials->getConsumerKey(),
                 'access_token' => $this->credentials->getAccessToken(),
+                'detailType' => 'complete',
                 ];
         $data = $this->httpClient->post("https://getpocket.com/v3/{$method}", [
             'body' => array_merge($defaultBody, $args)

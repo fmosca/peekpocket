@@ -8,3 +8,9 @@ Feature: Read Pocket entries
         And there is a initialized Pocket client
         When I ask for the last 5 items
         Then the first element of the result array must have url "http://example.com" 
+
+    Scenario: Read the entries of a given day
+        Given I Saved 3 entries yesterday
+        When I ask for yesterday's entries
+        Then I get a collection of 3 entries
+

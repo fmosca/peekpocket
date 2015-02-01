@@ -1,0 +1,331 @@
+HTTP/1.1 200 OK
+Content-Type: application/json
+Status: 200 OK
+
+{
+  "status": 1,
+  "complete": 1,
+  "list": {
+    "830516376": {
+      "item_id": "830516376",
+      "resolved_id": "830516376",
+      "given_url": "http:\/\/behaviordriventeams.com\/my-simple-bdd-workflow\/",
+      "given_title": "My Simple BDD Workflow | Building Behavior Driven Teams",
+      "favorite": "0",
+      "status": "0",
+      "time_added": "1422808354",
+      "time_updated": "1422808354",
+      "time_read": "0",
+      "time_favorited": "0",
+      "sort_id": 0,
+      "resolved_title": "My Simple BDD Workflow",
+      "resolved_url": "http:\/\/behaviordriventeams.com\/my-simple-bdd-workflow\/",
+      "excerpt": "Sometimes I get questions about how do I really use BDD in real life projects. I\u2019ve figured out I\u2019ll share this workflow so you\u00a0could try it yourself and give me some feedback if you like it.",
+      "is_article": "1",
+      "is_index": "0",
+      "has_video": "0",
+      "has_image": "1",
+      "word_count": "711",
+      "image": {
+        "item_id": "830516376",
+        "src": "http:\/\/behaviordriventeams.com\/wp-content\/uploads\/2015\/01\/Screenshot-2015-01-26-20.24.08.png",
+        "width": "1024",
+        "height": "291"
+      },
+      "images": {
+        "1": {
+          "item_id": "830516376",
+          "image_id": "1",
+          "src": "http:\/\/behaviordriventeams.com\/wp-content\/uploads\/2015\/01\/Screenshot-2015-01-26-20.24.08.png",
+          "width": "1024",
+          "height": "291",
+          "credit": "",
+          "caption": ""
+        },
+        "2": {
+          "item_id": "830516376",
+          "image_id": "2",
+          "src": "http:\/\/behaviordriventeams.com\/wp-content\/uploads\/2015\/01\/Screenshot-2015-01-29-19.54.55.png",
+          "width": "1024",
+          "height": "788",
+          "credit": "",
+          "caption": ""
+        },
+        "3": {
+          "item_id": "830516376",
+          "image_id": "3",
+          "src": "http:\/\/behaviordriventeams.com\/wp-content\/uploads\/2015\/01\/1422611468_full1.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        },
+        "4": {
+          "item_id": "830516376",
+          "image_id": "4",
+          "src": "http:\/\/behaviordriventeams.com\/wp-content\/uploads\/2015\/01\/1422611928_full1.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        },
+        "5": {
+          "item_id": "830516376",
+          "image_id": "5",
+          "src": "http:\/\/behaviordriventeams.com\/wp-content\/uploads\/2015\/01\/1422622112_full1.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        },
+        "6": {
+          "item_id": "830516376",
+          "image_id": "6",
+          "src": "http:\/\/behaviordriventeams.com\/wp-content\/uploads\/2015\/01\/1422622353_full1.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        },
+        "7": {
+          "item_id": "830516376",
+          "image_id": "7",
+          "src": "http:\/\/behaviordriventeams.com\/wp-content\/uploads\/2015\/01\/1422622698_full1.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        },
+        "8": {
+          "item_id": "830516376",
+          "image_id": "8",
+          "src": "http:\/\/behaviordriventeams.com\/wp-content\/uploads\/2015\/01\/1422622756_full1.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        },
+        "9": {
+          "item_id": "830516376",
+          "image_id": "9",
+          "src": "http:\/\/behaviordriventeams.com\/wp-content\/uploads\/2015\/01\/1422623084_full1.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        }
+      }
+    },
+    "792533208": {
+      "item_id": "792533208",
+      "resolved_id": "792533208",
+      "given_url": "http:\/\/www.americanscientist.org\/issues\/pub\/2015\/1\/cultures-of-code\/99999",
+      "given_title": "",
+      "favorite": "0",
+      "status": "0",
+      "time_added": "1422802762",
+      "time_updated": "1422802766",
+      "time_read": "0",
+      "time_favorited": "0",
+      "sort_id": 1,
+      "resolved_title": "Cultures of Code",
+      "resolved_url": "http:\/\/www.americanscientist.org\/issues\/pub\/2015\/1\/cultures-of-code\/99999",
+      "excerpt": "Kim studies parallel algorithms, designed for computers with thousands of processors. Chris builds computer simulations of fluids in motion, such as ocean currents. Dana creates software for visualizing geographic data. These three people have much in common.",
+      "is_article": "1",
+      "is_index": "0",
+      "has_video": "0",
+      "has_image": "1",
+      "word_count": "2697",
+      "authors": {
+        "15920": {
+          "item_id": "792533208",
+          "author_id": "15920",
+          "name": "Brian Hayes",
+          "url": "http:\/\/www.americanscientist.org\/authors\/detail\/brian-hayes"
+        }
+      },
+      "image": {
+        "item_id": "792533208",
+        "src": "http:\/\/amsciadmin.eresources.com\/Libraries\/images\/thumbnail\/201412411414710730-2015-01HayesF1.jpg?st=00",
+        "width": "0",
+        "height": "0"
+      },
+      "images": {
+        "1": {
+          "item_id": "792533208",
+          "image_id": "1",
+          "src": "http:\/\/amsciadmin.eresources.com\/Libraries\/images\/thumbnail\/201412411414710730-2015-01HayesF1.jpg?st=00",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        },
+        "2": {
+          "item_id": "792533208",
+          "image_id": "2",
+          "src": "http:\/\/amsciadmin.eresources.com\/Libraries\/images\/201412411424710731-2015-01HayesPQ.jpg?st=11",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        }
+      }
+    },
+    "831820156": {
+      "item_id": "831820156",
+      "resolved_id": "831820156",
+      "given_url": "http:\/\/lambda-the-ultimate.org\/node\/5113",
+      "given_title": "",
+      "favorite": "0",
+      "status": "1",
+      "time_added": "1422793173",
+      "time_updated": "1422803043",
+      "time_read": "1422803042",
+      "time_favorited": "0",
+      "sort_id": 2,
+      "resolved_title": "Some notes on Rust, the language.",
+      "resolved_url": "http:\/\/lambda-the-ultimate.org\/node\/5113",
+      "excerpt": "Nobody seems be saying much about Rust, or if they are, the LtU search can't find it. So I'm starting a Rust topic.  After some initial use of Mozilla's \"Rust\" language, a few comments. I'm assumming here some general familiarity with the language.",
+      "is_article": "1",
+      "is_index": "0",
+      "has_video": "0",
+      "has_image": "0",
+      "word_count": "660",
+      "authors": {
+        "7495535": {
+          "item_id": "831820156",
+          "author_id": "7495535",
+          "name": "John Nagle",
+          "url": "http:\/\/lambda-the-ultimate.org\/node\/user\/12742"
+        }
+      }
+    },
+    "671030243": {
+      "item_id": "671030243",
+      "resolved_id": "671030243",
+      "given_url": "http:\/\/www.newyorker.com\/magazine\/2011\/05\/16\/creation-myth",
+      "given_title": "Creation Myth - The New Yorker",
+      "favorite": "0",
+      "status": "0",
+      "time_added": "1422751201",
+      "time_updated": "1422751201",
+      "time_read": "0",
+      "time_favorited": "0",
+      "sort_id": 3,
+      "resolved_title": "The New Yorker",
+      "resolved_url": "http:\/\/www.newyorker.com\/magazine\/2011\/05\/16\/creation-myth",
+      "excerpt": "In late 1979, a twenty-four-year-old entrepreneur paid a visit to a research center in Silicon Valley called Xerox PARC. He was the co-founder of a small computer startup down the road, in Cupertino. His name was Steve Jobs.  Xerox PARC was the innovation arm of the Xerox Corporation.",
+      "is_article": "1",
+      "is_index": "0",
+      "has_video": "0",
+      "has_image": "1",
+      "word_count": "5846",
+      "authors": {
+        "21989690": {
+          "item_id": "671030243",
+          "author_id": "21989690",
+          "name": "Malcolm Gladwell",
+          "url": "http:\/\/www.newyorker.com\/contributors\/malcolm-gladwell"
+        }
+      },
+      "image": {
+        "item_id": "671030243",
+        "src": "http:\/\/www.newyorker.com\/wp-content\/uploads\/2011\/05\/110516_r20860_g2048-1200.jpg",
+        "width": "0",
+        "height": "0"
+      },
+      "images": {
+        "1": {
+          "item_id": "671030243",
+          "image_id": "1",
+          "src": "http:\/\/www.newyorker.com\/wp-content\/uploads\/2011\/05\/110516_r20860_g2048-1200.jpg",
+          "width": "0",
+          "height": "0",
+          "credit": "\n\t\t\t\t\t\t\t\t\t\t PAUL ROGERS\t\t\t\t\t\t\t\t\t",
+          "caption": "The mouse was conceived by the computer scientist Douglas Engelbart, developed by Xerox PARC, and made marketable by Apple.\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\tCredit PAUL ROGERS\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+        }
+      }
+    },
+    "566401731": {
+      "item_id": "566401731",
+      "resolved_id": "566401731",
+      "given_url": "https:\/\/www.domenkozar.com\/2014\/03\/11\/why-puppet-chef-ansible-arent-good-enough-and-we-can-do-better\/",
+      "given_title": "Domen Ko\u017ear",
+      "favorite": "0",
+      "status": "0",
+      "time_added": "1422623520",
+      "time_updated": "1422623520",
+      "time_read": "0",
+      "time_favorited": "0",
+      "sort_id": 4,
+      "resolved_title": "Why Puppet\/Chef\/Ansible aren't good enough (and we can do better)",
+      "resolved_url": "https:\/\/www.domenkozar.com\/2014\/03\/11\/why-puppet-chef-ansible-arent-good-enough-and-we-can-do-better\/",
+      "excerpt": "This particular blog post was sitting on my mind for a long time. I don't want to start a flame war, but at the same time I also don't wish for Linux community to build and grow upon ad-hoc solutions that we've accumulated over the last 30 years to the packaging and deployment problems.",
+      "is_article": "1",
+      "is_index": "0",
+      "has_video": "0",
+      "has_image": "1",
+      "word_count": "1977",
+      "image": {
+        "item_id": "566401731",
+        "src": "https:\/\/www.domenkozar.com\/images\/packaging_stateful.png",
+        "width": "0",
+        "height": "0"
+      },
+      "images": {
+        "1": {
+          "item_id": "566401731",
+          "image_id": "1",
+          "src": "https:\/\/www.domenkozar.com\/images\/packaging_stateful.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        },
+        "2": {
+          "item_id": "566401731",
+          "image_id": "2",
+          "src": "https:\/\/www.domenkozar.com\/images\/packaging_stateless.png",
+          "width": "0",
+          "height": "0",
+          "credit": "",
+          "caption": ""
+        }
+      }
+    },
+    "829984252": {
+      "item_id": "829984252",
+      "resolved_id": "829984252",
+      "given_url": "https:\/\/topherlandry.wordpress.com\/2015\/01\/29\/solid-architecture-and-the-decorator-pattern\/",
+      "given_title": "SOLID Architecture and the Decorator Pattern | Insights into Software Devel",
+      "favorite": "0",
+      "status": "0",
+      "time_added": "1422623133",
+      "time_updated": "1422623133",
+      "time_read": "0",
+      "time_favorited": "0",
+      "sort_id": 5,
+      "resolved_title": "SOLID Architecture and the Decorator Pattern",
+      "resolved_url": "https:\/\/topherlandry.wordpress.com\/2015\/01\/29\/solid-architecture-and-the-decorator-pattern\/",
+      "excerpt": "My last post was on the Single Responsibility Principle and the repository pattern. I received a comment back that my implementation would be cleaner if I had used the decorator pattern.",
+      "is_article": "1",
+      "is_index": "0",
+      "has_video": "0",
+      "has_image": "0",
+      "word_count": "727",
+      "authors": {
+        "28935146": {
+          "item_id": "829984252",
+          "author_id": "28935146",
+          "name": "topherlandry",
+          "url": "https:\/\/topherlandry.wordpress.com\/author\/topherlandry\/"
+        }
+      }
+    }
+  },
+  "error": null,
+  "search_meta": {
+    "search_type": "normal"
+  },
+  "since": 1422810340
+}

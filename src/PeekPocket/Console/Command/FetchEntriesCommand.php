@@ -46,13 +46,14 @@ class FetchEntriesCommand extends Command
             'query' => [
                 'consumer_key' => $consumerKey,
                 'access_token' => $accessToken,
-                'state' => 'all'
+                'state' => 'all',
+                'detailType' => 'complete',
+                'count' => 6
             ]
         ]);
 
         if ($data->getStatusCode() == 200) {
-            $entries = json_decode($data->getBody());
-            print_r($entries);
+            print $data->getBody();
         } 
     }
 }

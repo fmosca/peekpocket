@@ -30,7 +30,8 @@ class PocketClientSpec extends ObjectBehavior
             'body' => [
                 'consumer_key' => 'foo',
                 'access_token' => 'bar',
-                'count' => 5
+                'count' => 5,
+                'detailType' => 'complete',
                 ]
             ])
             ->shouldBeCalled()
@@ -52,7 +53,8 @@ class PocketClientSpec extends ObjectBehavior
             'body' => [
                 'consumer_key' => 'foo',
                 'access_token' => 'bar',
-                'count' => 5
+                'count' => 5,
+                'detailType' => 'complete',
                 ]
             ])
             ->shouldBeCalled()
@@ -75,7 +77,8 @@ class PocketClientSpec extends ObjectBehavior
             'body' => [
                 'consumer_key' => 'foo',
                 'access_token' => 'bar',
-                'since' => $since->format('U')
+                'since' => $since->format('U'),
+                'detailType' => 'complete',
                 ]
             ])
             ->shouldBeCalled()
@@ -89,10 +92,64 @@ class PocketClientSpec extends ObjectBehavior
         $this->fetchItemsSince($since)->shouldHaveCount(1);
     }
 
+    function it_returns_an_array_of_items_by_date($credentials, $httpClient, ResponseInterface $response)
+    {
+        $since = new \DateTime('yesterday');
+
+        $credentials->getConsumerKey()->willReturn('foo');
+        $credentials->getAccessToken()->willReturn('bar');
+        $httpClient->post("https://getpocket.com/v3/get", [
+            'body' => [
+                'consumer_key' => 'foo',
+                'access_token' => 'bar',
+                'since' => $since->format('U'),
+                'detailType' => 'complete',
+                ]
+            ])
+            ->shouldBeCalled()
+            ->willReturn($response);
+
+        $response->getStatusCode()
+            ->willReturn(200);
+        
+        $sampleResponse = $this->createEmptyPocketResponse();
+        $this->addDatedItems($sampleResponse, 3, 'yesterday');
+        $this->addDatedItems($sampleResponse, 1, 'today');
+        $response->getBody()
+            ->willReturn($this->jsonResponse($sampleResponse));
+
+        $this->fetchItemsByDate($since)->shouldHaveCount(3);
+    }
+
     private function sampleOneItemList()
     {
-        list($header, $body) = preg_split('/\n\n/', file_get_contents(__DIR__ . '/../../fixtures/api-one-item-response.http'));
+        list($header, $body) = preg_split('/\n\n/', file_get_contents(__DIR__ . '/../../fixtures/api-1-items-response.http'));
         return $body;
         
     }
+
+    private function createEmptyPocketResponse()
+    {
+        return ['status' => 1, 'complete' => 1, 'list' => []];
+    }
+
+    private function addDatedItems(&$response, $count, $dateString)
+    {
+        for ($i=0; $i<$count;$i++) { 
+            $response['list'][] = [
+                'resolved_url' => 'http://example.com/' . md5($dateString) . '-' . $i,
+                'resolved_title' => "Example {$i} {$dateString}",
+                'excerpt' => '',
+                'status' => 0,
+                'time_added' => (new \DateTime($dateString . ' noon'))->format('U'),
+                'time_read' => 0,
+                ];
+        }
+    }
+
+    private function jsonResponse($response)
+    {
+        return json_encode($response);
+    }
+
 }
